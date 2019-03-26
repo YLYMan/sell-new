@@ -1,25 +1,46 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <!--<router-link to="/">Home</router-link> |-->
-      <!--<router-link to="/about">About</router-link>-->
+    <v-header></v-header>
+    <div class="tab">
+      <div class="tab-item">
+        <router-link to="/goods">商品</router-link>
+      </div>
+      <div class="tab-item">
+        <router-link to="/ratings">评论</router-link>
+
+      </div>
+      <div class="tab-item">
+        <router-link to="/seller">商家</router-link>
+      </div>
     </div>
-    <router-view/>
+    <router-view></router-view>
+
   </div>
 </template>
-<style lang="stylus">
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
+<script type="text/ecmascript-6">
+  import header from './components/header/header.vue'
 
-#nav
-  padding 30px
-  a
-    font-weight bold
-    color #2c3e50
-    &.router-link-exact-active
-      color #42b983
+  export default {
+    components: {
+      'v-header': header
+    }
+  }
+</script>
+<style lang="stylus">
+  @import "common/stylus/reset.styl"
+
+  #app
+    .tab
+      display: flex
+      height: 40px
+      line-height: 40px
+      .tab-item
+        flex: 1
+        text-align: center
+        & > a
+          display: block
+          font-size: 14px
+          color: rgb(77, 85, 93)
+          &.active
+            color: rgb(240, 20, 20)
 </style>
