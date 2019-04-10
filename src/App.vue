@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <v-header></v-header>
-    <div class="tab">
+    <v-header :seller="seller"></v-header>
+    <div class="tab border-1px">
       <div class="tab-item">
         <router-link to="/goods">商品</router-link>
       </div>
@@ -18,22 +18,39 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-  import header from './components/header/header.vue'
-
+  import VHeader from 'components/v-header/v-header.vue'
+  import { getSeller } from './api'
   export default {
+    name: 'app',
+    data() {
+      return {
+        seller: {}
+      }
+    },
+    created() {
+      this._getSeller()
+    },
+    methods: {
+      _getSeller() {
+        getSeller().then((seller) => {
+          this.seller = seller
+        })
+      }
+    },
     components: {
-      'v-header': header
+      VHeader
     }
   }
 </script>
 <style lang="stylus">
   @import "common/stylus/reset.styl"
-
+  @import "common/stylus/mixin.styl"
   #app
     .tab
       display: flex
       height: 40px
       line-height: 40px
+      border-1px(rgba(7, 17, 27, 0.1))
       .tab-item
         flex: 1
         text-align: center
